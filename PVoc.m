@@ -44,8 +44,7 @@ scf = 1.0;
 X = scf * TFCT(x', Nfft, Nwind, Nov);
 
 Fs = 11025
-figure(1)
-plot(0:1/Fs:Nfft,X)
+
 % 2- Interpolation des échantillons fréquentiels
 %------------------------------------------------
 % Calcul de la nouvelle base de temps (en terme d'échantillons)
