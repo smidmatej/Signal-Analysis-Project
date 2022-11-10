@@ -1,32 +1,32 @@
 function x = TFCTInv(d, Nfft, Nwin, hop)
 
-% D = TFCTInv(d,Nfft,w,hop)     
-% Transformée de Fourier à court terme inverse(TFCT inverse)
+% D = TFCTInv(d,Nfft,w,hop)
+% Inverse Short Term Fourier Transform(inverse TFCT)
 %
-% d : signal dont on veut calculer la TFCT inverse
-% Nfft : nombre de points pour la FFT inverse
-% win : nombre de points de la fenêtre de pondération
-% hop : nombre de points de recouvrement des fenêtres
+% d: signal for which we want to calculate the inverse TFCT
+% Nfft: number of points for the inverse FFT
+% win: number of points in the weighting window
+% hop: number of window covering points
 %
-% x : résultat de la TFCT inverse 
-% 
-% Programme largement inspiré de celui de D. Marshall 
+%x: result of the inverse TFCT
+%
+% Program largely inspired by that of D. Marshall
 
 
-%Initialisation des paramètres
+%Initialization of parameters
 N = size(d);
 cols = N(2);
 xlen = Nfft + (cols-1)*hop;
 
-%Initialisation du vecteur de sortie (la TFCT inverse)
+%Initialization of the output vector (the inverse TFCT)
 x = zeros(1,xlen);
 
-%création de la fenêtre de pondération
+%creation of the weighting window
     if rem(Nwin, 2) == 0   
-      Nwin = Nwin + 1;  %pour avoir un nombre impair d'échantillons
+      Nwin = Nwin + 1;  %for having an odd number of samples
     end
     halflen = (Nwin-1)/2;
-    halff = Nfft/2;   % point central de la fenêtre
+    halff = Nfft/2;   % central point of the window
     halfwin = 0.5 * ( 1 + cos( pi * (0:halflen)/halflen));
     win = zeros(1, Nfft);
     acthalflen = min(halff, halflen);

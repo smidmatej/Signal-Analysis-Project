@@ -1,22 +1,22 @@
 function y = PVoc(x, rapp, Nfft, Nwind)
 % y = PVoc(x, rapp, Nfft , Nwind)
-% Fonction du vocodeur de phase permettant de modifier un son audio 
-% en interpolant dans le domaine fréquentiel en passant 
-% par la TF à court terme.
+% Phase vocoder function for modifying an audio sound
+% by interpolating in the frequency domain passing
+% by short-term TF.
 %
-% x: signal audio d'origine (on traite 1 seule voie á la fois --> x est un
-% vecteur)
+% x: original audio signal (only 1 channel is processed at a time --> x is a
+% vector)
 %
-% rapp : est le rapport entre la vitesse d'origine et la vitesse d'arrivée
+% ratio: is the ratio between the original speed and the arrival speed
 %
-% Nfft : nombre de points (échantillons) sur lesquels on réalise la TF
-% fenêtrée
+% Nfft: number of points (samples) on which the FT is performed
+% windowed
 %
-% Nwind : longueur, en nombre d'échantillons, de la fenêtre de pondération lors de la TFCT
+% Nwind: length, in number of samples, of the weighting window during the TFCT
 
 
 
-% Valeurs par défaut dans le cas où les paramètres d'entrée ne sont pas tous donnés
+% Default values â€‹â€‹in case the input parameters are not all given
 %----------------------------------------------------------------------------------
 if nargin < 3
   Nfft = 1024;
@@ -26,41 +26,41 @@ if nargin < 4
   Nwind = Nfft;
 end
 
-% Paramètres utiles pour la TFCT
+% Useful parameters for TFCT
 %--------------------------------
-% On choisit une fenêtre de pondération de Hanning
-% Afin d'avoir une bonne reconstruction avec une fenêtre de Hanning (signaux lissés), 
-% nous prenons un recouvrement de 25% de la fenêtre 
+% We choose a Hanning weighting window
+% In order to have a good reconstruction with a Hanning window (smoothed signals),
+% we take an overlap of 25% of the window
 Nov = Nfft/4;
-% Facteur d'échelle 
-%Remarque : pour retrouver la bonne amplitude lorsqu'on fait une 
-% TFCT directe + une TFCT inverse, on le prend égal á 2/3... 
-% nous ne détaillerons pas ici la démonstration. 
-% Dans notre application, on peut le prendre = 1 
+% Scale factor
+% Note: to find the correct amplitude when making a
+% direct TFCT + an inverse TFCT, we take it equal to 2/3...
+% we will not detail the demonstration here.
+% In our application, we can take it = 1
 scf = 1.0;
 
-% 1- CALCUL DE LA TFCT
+% 1- CALCULATION OF THE TFCT
 %-----------------------
 X = scf * TFCT(x', Nfft, Nwind, Nov);
 
 Fs = 11025
 
-% 2- Interpolation des échantillons fréquentiels
+% 2- Interpolation of frequency samples
 %------------------------------------------------
-% Calcul de la nouvelle base de temps (en terme d'échantillons)
-% cela correspond au nouveau nombre de trames (fenêtres temporelles)
+% Calculation of the new time base (in terms of samples)
+% this corresponds to the new number of frames (time windows)
 [nl, nc] = size(X);
 Nt = [0:rapp:(nc-2)];
-% Remarque :
-% on prend Ntmax à (nc-2) au lieu de (nc-1) car lors de l'interpolation,
-% on travaille avec les colonnes n et n+1, n appartenent à Nt.
+% Remark :
+% we take Ntmax at (nc-2) instead of (nc-1) because during the interpolation,
+% we work with columns n and n+1, n belong to Nt.
 
-% Calcul de la nouvelle TFCT
+% Calculation of the new TFCT
 X2 = TFCT_Interp(X, Nt, Nov);
-% Remarque : vous devrez créer cette fonction "TFCT_Interp" !
+% Note: you will need to create this "TFCT_Interp" function!
 
 
-% 3- CALCUL DE LA TFCT INVERSE
+% 3- CALCULATION OF THE REVERSE TFCT
 %------------------------------
 y = TFCTInv(X2, Nfft, Nwind, Nov)';
 

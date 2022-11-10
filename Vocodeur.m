@@ -1,47 +1,43 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% VOCODEUR : Programme principal réalisant un vocodeur de phase 
-% et permettant de :
+% Voicecoder : Main program which permit to :
 %
-% 1- modifier le tempo (la vitesse de "prononciation")
-%   sans modifier le pitch (fréquence fondamentale de la parole)
+% 1- modify the tempo (the speed of "prononciation")
+%   without modifying the pitch (fundamental frequence of speaking)
 %
-% 2- modifier le pitch 
-%   sans modifier la vitesse 
+% 2- modify the pitch without modifying the speed 
 %
-% 3- "robotiser" une voix
+% 3- "robotize" a voice
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
-% Récupération d'un signal audio
+% Audio signal recovery
 %--------------------------------
 
- [y,Fs]=audioread('Diner.wav');   %signal d'origine
-% [y,Fs]=audioread('Extrait.wav');   %signal d'origine
-% [y,Fs]=audioread('Halleluia.wav');   %signal d'origine
-
-% Remarque : si le signal est en stéréo, ne traiter qu'une seule voie à la
-% fois
+ [y,Fs]=audioread('Diner.wav');   %original signal
+% [y,Fs]=audioread('Extrait.wav');   %original signal
+% [y,Fs]=audioread('Halleluia.wav');   %original signal
+% Note: if the signal is in stereo, only process one channel at a time.
+% time
 y = y(:,1);
 
-% Courbes (évolution au cours du temps, spectre et spectrogramme)
+% Curves (evolution over time, spectrum and spectrogram)
 %--------
-% Ne pas oublier de créer les vecteurs temps, fréquences...
-% A FAIRE !
-
+% Don't forget to create the time and frequency vectors...
+% TO DO !
 % Ecoute
 %-------
 % A FAIRE !
 
 %%
 %-------------------------------
-% 1- MODIFICATION DE LA VITESSE
-% (sans modification du pitch)
+% 1- SPEED MODIFICATION
+% (without pitch modification)
 %-------------------------------
-% PLUS LENT
-rapp = 2/3;   %peut être modifié
+% SLOWER
+rapp = 2/3;   %can be modified
 ylent = PVoc(y,rapp,1024); 
 
-% Ecoute
+% Listen
 %-------
 % A FAIRE !
 
@@ -51,94 +47,93 @@ ylent = PVoc(y,rapp,1024);
 % A FAIRE !
 
 %
-% PLUS RAPIDE
-rapp = 3/2;   %peut être modifié
+% FASTER
+rapp = 3/2;   %can be modified
 yrapide = PVoc(y,rapp,1024); 
 
 
-% Ecoute 
+% Listen 
 %-------
 % A FAIRE !
 
-% Courbes
+% Curves
 %--------
-% A FAIRE !
+% TO DO !
 
 %%
 %----------------------------------
-% 2- MODIFICATION DU PITCH
-% (sans modification de vitesse)
+% 2- CHANGE PITCH
+% (without speed modification)
 %----------------------------------
-% Paramètres généraux:
+% General settings:
 %---------------------
-% Nombre de points pour la FFT/IFFT
-Nfft = 256;
+% Number of points for FFT/IFFT
+Nfft=256;
 
-% Nombre de points (longueur) de la fenêtre de pondération 
-% (par défaut fenêtre de Hanning)
+% Number of points (length) of the weighting window
+% (by default Hanning window)
 Nwind = Nfft;
 
-% Augmentation 
+% Increase
 %--------------
-a = 2;  b = 3;  %peut être modifié
+a = 2; b=3; %can be changed
 yvoc = PVoc(y, a/b,Nfft,Nwind);
 
-% Ré-échantillonnage du signal temporel afin de garder la même vitesse
-% A FAIRE !
+% Resampling the time signal to keep the same speed
+% TO DO !
 
-%Somme de l'original et du signal modifié
-%Attention : on doit prendre le même nombre d'échantillons
-%Remarque : vous pouvez mettre un coefficient à ypitch pour qu'il
-%intervienne + ou - dans la somme...
-% A FAIRE !
+%Sum of original and modified signal
+%Attention: we must take the same number of samples
+%Note: you can put a coefficient on ypitch so that it
+% intervenes + or - in the sum...
+% TO DO !
 
-% Ecoute
+% Listen
 %-------
-% A FAIRE !
+% TO DO !
 
-% Courbes
+% Curves
 %--------
-% A FAIRE !
+% TO DO !
 
 
-%Diminution 
+%Decrease
 %------------
 
-a = 3;  b = 2;   %peut être modifié
-yvoc = PVoc(y, a/b,Nfft,Nwind); 
+a=3; b=2; %can be changed
+yvoc = PVoc(y, a/b,Nfft,Nwind);
 
-% Ré-échantillonnage du signal temporel afin de garder la même vitesse
-% A FAIRE !
+% Resampling the time signal to keep the same speed
+% TO DO !
 
-%Somme de l'original et du signal modifié
-%Attention : on doit prendre le même nombre d'échantillons
-%Remarque : vous pouvez mettre un coefficient à ypitch pour qu'il
-%intervienne + ou - dans la somme...
-% A FAIRE !
+%Sum of original and modified signal
+%Attention: we must take the same number of samples
+%Note: you can put a coefficient on ypitch so that it
+% intervenes + or - in the sum...
+% TO DO !
 
-% Ecoute
+% Listen
 %-------
-% A FAIRE !
+% TO DO !
 
-% Courbes
+% Curves
 %--------
-% A FAIRE !
+% TO DO !
 
 
 %%
 %----------------------------
-% 3- ROBOTISATION DE LA VOIX
+% 3- VOICE ROBOTIZATION
 %-----------------------------
-% Choix de la fréquence porteuse (2000, 1000, 500, 200)
-Fc = 500;   %peut être modifié
+% Choice of carrier frequency (2000, 1000, 500, 200)
+HR=500; %can be changed
 
 yrob = Rob(y,Fc,Fs);
 
-% Ecoute
+% Listen
 %-------
-% A FAIRE !
+% TO DO !
 
-% Courbes
+% Curves
 %-------------
-% A FAIRE !
-
+% TO DO !
