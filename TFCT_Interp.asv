@@ -38,7 +38,7 @@ for idx_t = 1:(length(t))
     else
         % The end, set the last sample 
         M(:, idx_t) = abs(X(:, idx_x));
-        phi(:, idx_t) = phi_now;
+        phi(:, idx_t) = angle(X(:, idx_x)) - dphi0;
     end
 end
 
