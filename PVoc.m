@@ -57,7 +57,9 @@ Nt = [0:rapp:(nc-2)];
 
 % Calculation of the new TFCT
 X2 = TFCT_Interp(X, Nt, Nov);
+
 % Note: you will need to create this "TFCT_Interp" function!
+
 
 
 % 3- CALCULATION OF THE REVERSE TFCT
