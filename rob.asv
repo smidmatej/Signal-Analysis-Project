@@ -1,0 +1,6 @@
+function [yrob] = Rob(y,Fc,Fs)
+
+    
+    yrob = y
+end
+
