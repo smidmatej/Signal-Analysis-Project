@@ -1,5 +1,5 @@
 function [wahwah, fig] = wahwah(y, Fs, width, damping, min_cutoff, max_cutoff)
-
+    % https://ses.library.usyd.edu.au/bitstream/handle/2123/10578/Marion%2C%20Bruno%20-%20Wah%20Wah.pdf?sequence=2&isAllowed=y
     center_freq = width/Fs;
     
     cutoff_freq=min_cutoff:center_freq:max_cutoff;
