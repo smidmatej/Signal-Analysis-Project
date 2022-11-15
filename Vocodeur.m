@@ -16,12 +16,15 @@ clear all
 close all
 % [y,Fs]=audioread('sounds/Diner.wav');   %original signal
 % [y,Fs]=audioread('sounds/Extrait.wav');   %original signal
-% [y,Fs]=audioread('sounds/Halleluia.wav');   %original signal
+[y,Fs]=audioread('sounds/Halleluia.wav');   %original signal
 % [y,Fs]=audioread('sounds/magenta.mp3');   %original signal
-[y,Fs]=audioread('sounds/magenta_cut.mp3');   %original signal
-%  [y,Fs]=audioread('soundspaulhill2.wav');   %original signal
+% [y,Fs]=audioread('sounds/magenta_cut.mp3');   %original signal
+[y_extra,Fs]=audioread('soundspaulhill2.wav');   %original signal
 % Note: if the signal is in stereo, only process one channel at a time.
 % time
+
+% Make sure the Fs matches for them
+y = y + y_extra(1:1000,1);
 y = y(:,1);
 
 
